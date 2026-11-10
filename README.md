@@ -35,6 +35,14 @@ npm run preview
 5. **Formal verification** — product construction for authorization and resource-state monitors, depth bounds, and the role of IFDS/IDE and Weighted Pushdown Systems.
 6. **Security applications** — uncontrolled recursion, authorization across nested resources, exceptional cleanup, and shadow-stack control-flow integrity.
 
+## Verification model notes
+
+- The depth property counts return-site symbols, not the bottom marker: when the displayed stack word includes `⊥`, the bounded condition is `|w| − 1 ≤ K`.
+- A productive cycle on an accepting path of the automaton for reachable configurations is the relevant evidence for arbitrarily long represented stack words; an arbitrary cycle alone is not sufficient.
+- The parser accepts only JSON whitespace characters (space, tab, line feed, and carriage return), not the broader JavaScript `\s` class.
+- The authorization monitor is a finite abstraction. A real analysis must preserve distinctions between resource identities or permission classes that matter to the checked property.
+- Intel CET and LLVM ShadowCallStack are distinct protected-return-address mechanisms; their exact enforcement and failure behavior depend on platform and runtime.
+
 ## Scope and technical notes
 
 - A PDA is a language-recognition model. A PDS is a transition-system model commonly used for recursive program verification; they are related but not interchangeable.
@@ -47,14 +55,4 @@ npm run preview
 
 ## Navigation
 
-Use the horizontal section navigation at the top or the Previous/Next controls at the bottom. Left/Right Arrow and Page Up/Page Down move between sections when a text field is not focused.
-
-
-## Latest refinements
-
-- The header now contains only the course title and six section navigation steps; redundant breadcrumb, section-count and topic labels have been removed.
-- The visual theme uses the specified orange palette (`#FF6600`, `#FF5A00`, `#FB651E`) with warm neutral and high-contrast charcoal surfaces.
-- The stack trace shows a PDS top-of-stack rewrite rule and the resulting full stack configuration at every step.
-- The JSON parser simulation includes token-boundary validation and a normal/fast playback control.
-- Repeated overview/navigation blocks and duplicate caveats have been removed.
-- Formal notation, semiring overlines, headings and transition arrows have been corrected according to the supplied screenshot audit.
+Use the horizontal section navigation at the top or the Previous/Next controls at the bottom. Left/Right Arrow and Page Up/Page Down move between sections when focus is outside interactive controls and editable content.
